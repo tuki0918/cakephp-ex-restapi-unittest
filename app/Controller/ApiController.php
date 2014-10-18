@@ -4,7 +4,10 @@ App::uses('AppController', 'Controller');
 
 class ApiController extends AppController {
 
-    public $components = array('RequestHandler');
+    public $components = array(
+        'RequestHandler',
+        'RESTfulAPI'
+    );
 
     public $uses = array(
         'Post'
@@ -12,33 +15,18 @@ class ApiController extends AppController {
 
     public $autoLayout = false;
 
-    private $_result = null;
 
     public function beforeRender() {
         parent::beforeRender();
-        $this->_viewJson();
-    }
 
-    public function setResult($data) {
-        $this->_result = $data;
-    }
-
-    private function _viewJson() {
-        if (!is_null($this->_result)) {
-            $data = $this->_result;
-            $this->viewClass = 'Json';
-            $this->set(compact('data'));
-            $this->set('_serialize', 'data');
-        } else {
-            throw new NotFoundException('404 Not found');
-        }
+        $this->RESTfulAPI->view();
     }
 
     public function index() {
         $data = array(
             1,2,4,5
         );
-        $this->setResult($data);
+        $this->RESTfulAPI->set($data);
     }
 
     public function items() {
@@ -61,7 +49,7 @@ class ApiController extends AppController {
                 ),
             )
         );
-        $this->setResult($data);
+        $this->RESTfulAPI->set($data);
     }
 
 
@@ -78,6 +66,6 @@ class ApiController extends AppController {
         ));
 
         $result = hash::get($data, 'Post');
-        $this->setResult($result);
+        $this->RESTfulAPI->set($result);
     }
 }
