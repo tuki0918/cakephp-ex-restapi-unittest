@@ -18,50 +18,26 @@ class ApiControllerTest extends ControllerTestCase {
 
     public function testIndex() {
         $data = array();
-        $result = $this->testAction('/api',
-            array(
-                'data'   => $data,
-                'method' => 'get',
-                'return' => 'contents',
-            )
+        $result = $this->testAction('/api/index',
+            array('data' => $data, 'method' => 'get', 'return' => 'contents')
         );
         $result = json_decode($result, true);
         $expected = array(
-            1,2,4,5
+            1,4,5
         );
         $this->assertEquals($expected, $result);
     }
 
-
-    public function testItems() {
+    public function testDraft() {
         $data = array();
-        $result = $this->testAction('/api/items',
-            array(
-                'data'   => $data,
-                'method' => 'get',
-                'return' => 'contents',
-            )
+        $result = $this->testAction('/api/draft',
+            array('data' => $data, 'method' => 'get', 'return' => 'contents')
         );
         $result = json_decode($result, true);
         $expected = array(
-            'data' => array(
-                array(
-                    'id'    => 1,
-                    'name'  => 'item01',
-                    'price' => 111,
-                ),
-                array(
-                    'id'    => 2,
-                    'name'  => 'item02',
-                    'price' => 222,
-                ),
-                array(
-                    'id'    => 3,
-                    'name'  => 'item03',
-                    'price' => 333,
-                ),
-            )
+            2,3
         );
         $this->assertEquals($expected, $result);
     }
+
 }

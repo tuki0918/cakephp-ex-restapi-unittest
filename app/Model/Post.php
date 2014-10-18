@@ -45,7 +45,7 @@ class Post extends AppModel {
                 'Post.id'     => $id,
                 'Post.status' => self::STATUS_PUBLISH,
             ),
-            'fields' => array('title', 'body')
+            'fields' => array('id', 'title', 'body')
         ));
         $result = hash::get($data, 'Post');
         return $result;
