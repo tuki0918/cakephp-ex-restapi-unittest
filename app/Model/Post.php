@@ -13,6 +13,9 @@ class Post extends AppModel {
  */
 	public $displayField = 'title';
 
+	const STATUS_PUBLISH = '0';
+	const STATUS_DRAFT   = '1';
+
 /**
  * Validation rules
  *

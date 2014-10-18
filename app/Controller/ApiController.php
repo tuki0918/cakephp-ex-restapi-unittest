@@ -1,10 +1,14 @@
 <?php
+App::uses('Post', 'Model');
 App::uses('AppController', 'Controller');
 
 class ApiController extends AppController {
 
-    public $uses = array('Post');
     public $components = array('RequestHandler');
+
+    public $uses = array(
+        'Post'
+    );
 
     public $autoLayout = false;
 
@@ -12,7 +16,6 @@ class ApiController extends AppController {
 
     public function beforeRender() {
         parent::beforeRender();
-
         $this->_viewJson();
     }
 
@@ -21,11 +24,13 @@ class ApiController extends AppController {
     }
 
     private function _viewJson() {
-        if (!empty($this->_result)) {
+        if (!is_null($this->_result)) {
             $data = $this->_result;
             $this->viewClass = 'Json';
             $this->set(compact('data'));
             $this->set('_serialize', 'data');
+        } else {
+            throw new NotFoundException('404 Not found');
         }
     }
 
@@ -57,5 +62,22 @@ class ApiController extends AppController {
             )
         );
         $this->setResult($data);
+    }
+
+
+    public function post($id = null) {
+
+        $id = !is_null($id) ? $id : null;
+
+        $data = $this->Post->find('first', array(
+            'conditions' => array(
+                'Post.id'     => $id,
+                'Post.status' => Post::STATUS_PUBLISH,
+            ),
+            'fields' => array('title', 'body')
+        ));
+
+        $result = hash::get($data, 'Post');
+        $this->setResult($result);
     }
 }
