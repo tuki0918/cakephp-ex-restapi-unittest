@@ -16,6 +16,42 @@ class Post extends AppModel {
 	const STATUS_PUBLISH = '0';
 	const STATUS_DRAFT   = '1';
 
+	public function getPublishIds() {
+        $data = $this->find('all', array(
+            'conditions' => array(
+                'Post.status' => self::STATUS_PUBLISH,
+            ),
+            'fields' => array('id')
+        ));
+        $result = hash::extract($data, '{n}.Post.id');
+        return $result;
+	}
+
+	public function getDraftIds() {
+        $data = $this->find('all', array(
+            'conditions' => array(
+                'Post.status' => self::STATUS_DRAFT,
+            ),
+            'fields' => array('id')
+        ));
+        $result = hash::extract($data, '{n}.Post.id');
+        return $result;
+	}
+
+	public function getPost($id) {
+        $id = !is_null($id) ? $id : null;
+        $data = $this->find('first', array(
+            'conditions' => array(
+                'Post.id'     => $id,
+                'Post.status' => self::STATUS_PUBLISH,
+            ),
+            'fields' => array('title', 'body')
+        ));
+        $result = hash::get($data, 'Post');
+        return $result;
+	}
+
+
 /**
  * Validation rules
  *
