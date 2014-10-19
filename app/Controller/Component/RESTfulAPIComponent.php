@@ -13,7 +13,7 @@ class RESTfulAPIComponent extends Component {
         $this->_result = $data;
     }
 
-    public function view() {
+    public function viewJson() {
         if (!is_null($this->_result)) {
             $data = $this->_result;
             $this->Controller->viewClass = 'Json';

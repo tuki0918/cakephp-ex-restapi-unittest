@@ -18,7 +18,7 @@ class ApiController extends AppController {
     public function beforeRender() {
         parent::beforeRender();
 
-        $this->RESTfulAPI->view();
+        $this->RESTfulAPI->viewJson();
     }
 
     public function index() {
