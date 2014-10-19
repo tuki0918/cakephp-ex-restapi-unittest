@@ -4,3 +4,6 @@
 [submodule "app/Plugin/Phpunit"]
 	path = app/Plugin/Phpunit
 	url = https://github.com/dereuromark/cakephp-phpunit
+[submodule "app/Plugin/Migrations"]
+	path = app/Plugin/Migrations
+	url = git://github.com/CakeDC/migrations.git
