@@ -12,9 +12,9 @@ class ApiPostControllerTest extends ControllerTestCase {
  *
  * @var array
  */
-	// public $fixtures = array(
-	// 	'app.api'
-	// );
+	public $fixtures = array(
+		'app.post'
+	);
 
 
     public function testPostDataId1() {
@@ -53,5 +53,13 @@ class ApiPostControllerTest extends ControllerTestCase {
         $this->testAction('/api/post/3',
             array('data' => $data, 'method' => 'get', 'return' => 'contents')
         );
+    }
+
+    public function testPostAddData() {
+        $data = array('title' => 'apititle', 'body' => 'test test test.');
+        $result = $this->testAction('/posts/add',
+            array('data' => $data, 'method' => 'post', 'return' => 'result')
+        );
+        var_dump($result);
     }
 }
