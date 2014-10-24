@@ -17,6 +17,30 @@ class ApiPostControllerTest extends ControllerTestCase {
 	);
 
 
+    public function testIndex() {
+        $data = array();
+        $result = $this->testAction('/api/index',
+            array('data' => $data, 'method' => 'get', 'return' => 'contents')
+        );
+        $result = json_decode($result, true);
+        $expected = array(
+            1,4,5
+        );
+        $this->assertEquals($expected, $result);
+    }
+
+    public function testDraft() {
+        $data = array();
+        $result = $this->testAction('/api/draft',
+            array('data' => $data, 'method' => 'get', 'return' => 'contents')
+        );
+        $result = json_decode($result, true);
+        $expected = array(
+            2,3
+        );
+        $this->assertEquals($expected, $result);
+    }
+
     public function testPostDataId1() {
         $data = array();
         $result = $this->testAction('/api/post/1',
@@ -57,9 +81,31 @@ class ApiPostControllerTest extends ControllerTestCase {
 
     public function testPostAddData() {
         $data = array('title' => 'apititle', 'body' => 'test test test.');
-        $result = $this->testAction('/posts/add',
-            array('data' => $data, 'method' => 'post', 'return' => 'result')
+        $this->testAction('/posts/add',
+            array('data' => $data, 'method' => 'post')
         );
-        var_dump($result);
+        $this->assertStringEndsWith("/posts", $this->headers['Location']);
+
+        $data = array();
+        $result = $this->testAction('/api/post/6',
+            array('data' => $data, 'method' => 'get', 'return' => 'contents')
+        );
+        $result = json_decode($result, true);
+        $expected = array(
+            'id'    => '6',
+            'title' => 'apititle',
+            'body'  => 'test test test.',
+        );
+        $this->assertEquals($expected, $result);
+
+        $data = array();
+        $result = $this->testAction('/api/index',
+            array('data' => $data, 'method' => 'get', 'return' => 'contents')
+        );
+        $result = json_decode($result, true);
+        $expected = array(
+            1,4,5,6
+        );
+        $this->assertEquals($expected, $result);
     }
 }
