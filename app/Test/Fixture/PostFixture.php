@@ -12,10 +12,11 @@ class PostFixture extends CakeTestFixture {
  */
 	public $fields = array(
 		'id' => array('type' => 'integer', 'null' => false, 'default' => null, 'unsigned' => false, 'key' => 'primary'),
+		'status' => array('type' => 'integer', 'null' => false, 'default' => 0, 'unsigned' => false),
 		'title' => array('type' => 'string', 'null' => false, 'default' => null, 'collate' => 'latin1_swedish_ci', 'charset' => 'latin1'),
 		'body' => array('type' => 'text', 'null' => true, 'default' => null, 'collate' => 'latin1_swedish_ci', 'charset' => 'latin1'),
-		'created' => array('type' => 'date', 'null' => false, 'default' => null),
-		'modified' => array('type' => 'date', 'null' => false, 'default' => null),
+		'created' => array('type' => 'datetime', 'null' => false, 'default' => null),
+		'modified' => array('type' => 'datetime', 'null' => false, 'default' => null),
 		'indexes' => array(
 			'PRIMARY' => array('column' => 'id', 'unique' => 1)
 		),
@@ -29,11 +30,44 @@ class PostFixture extends CakeTestFixture {
  */
 	public $records = array(
 		array(
-			'id' => 1,
-			'title' => 'Lorem ipsum dolor sit amet',
-			'body' => 'Lorem ipsum dolor sit amet, aliquet feugiat. Convallis morbi fringilla gravida, phasellus feugiat dapibus velit nunc, pulvinar eget sollicitudin venenatis cum nullam, vivamus ut a sed, mollitia lectus. Nulla vestibulum massa neque ut et, id hendrerit sit, feugiat in taciti enim proin nibh, tempor dignissim, rhoncus duis vestibulum nunc mattis convallis.',
-			'created' => '2014-10-18',
-			'modified' => '2014-10-18'
+			'id'       => 1,
+			'status'   => 0,
+			'title'    => 'title1',
+			'body'     => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+			'created'  => '2014-10-24 17:00:37',
+			'modified' => '2014-10-24 17:00:37',
+		),
+		array(
+			'id'       => 2,
+			'status'   => 1,
+			'title'    => 'title2',
+			'body'     => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+			'created'  => '2014-10-24 17:00:37',
+			'modified' => '2014-10-24 17:00:37',
+		),
+		array(
+			'id'       => 3,
+			'status'   => 1,
+			'title'    => 'title3',
+			'body'     => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+			'created'  => '2014-10-24 17:00:37',
+			'modified' => '2014-10-24 17:00:37',
+		),
+		array(
+			'id'       => 4,
+			'status'   => 0,
+			'title'    => 'title4',
+			'body'     => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+			'created'  => '2014-10-24 17:00:37',
+			'modified' => '2014-10-24 17:00:37',
+		),
+		array(
+			'id'       => 5,
+			'status'   => 0,
+			'title'    => 'title5',
+			'body'     => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+			'created'  => '2014-10-24 17:00:37',
+			'modified' => '2014-10-24 17:00:37',
 		),
 	);
 

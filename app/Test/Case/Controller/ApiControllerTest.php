@@ -12,9 +12,9 @@ class ApiControllerTest extends ControllerTestCase {
  *
  * @var array
  */
-	// public $fixtures = array(
-	// 	'app.api'
-	// );
+	public $fixtures = array(
+		'app.post'
+	);
 
     public function testIndex() {
         $data = array();
