@@ -14,14 +14,28 @@ class PostsController extends AppController {
 	}
 
 	public function add() {
-		if ($this->request->is('post')) {
-			if($this->Post->save($this->request->data)) {
-				$this->Session->setFlash('入力完了');
+
+		$this->edit();
+
+	}
+
+	public function edit($id = null) {
+
+		if ( $this->request->is('post') || $this->request->is('put') ) {
+
+			if ( $this->Post->save($this->request->data) ) {
+
+				$this->Session->setFlash('The post has been saved!');
 				return $this->redirect(array('action'=>'index'));
+
 			} else {
-				$this->Session->setFlash('入力失敗');
+
+				$this->Session->setFlash('The post could not be saved. Please, try again.');
+
 			}
+
 		}
+
 	}
 
 }
