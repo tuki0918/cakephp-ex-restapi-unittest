@@ -21,7 +21,9 @@ class PostsController extends AppController {
 
 	public function edit($id = null) {
 
-		if ( $this->request->is('post') || $this->request->is('put') ) {
+		if ( $this->request->is(array('post', 'put')) ) {
+
+			if (!is_null($id) && $this->Post->exists($id)) $this->Post->id = $id;
 
 			if ( $this->Post->save($this->request->data) ) {
 
@@ -34,6 +36,8 @@ class PostsController extends AppController {
 
 			}
 
+		} else {
+			throw new MethodNotAllowedException();
 		}
 
 	}

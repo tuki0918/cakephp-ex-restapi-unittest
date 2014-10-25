@@ -80,7 +80,7 @@ class ApiPostControllerTest extends ControllerTestCase {
     }
 
     public function testPostAddData() {
-        $data = array('title' => 'apititle', 'body' => 'test test test.');
+        $data = array('title' => 'new post', 'body' => 'new post body.');
         $this->testAction('/posts/add',
             array('data' => $data, 'method' => 'post')
         );
@@ -93,8 +93,8 @@ class ApiPostControllerTest extends ControllerTestCase {
         $result = json_decode($result, true);
         $expected = array(
             'id'    => '6',
-            'title' => 'apititle',
-            'body'  => 'test test test.',
+            'title' => 'new post',
+            'body'  => 'new post body.',
         );
         $this->assertEquals($expected, $result);
 
@@ -107,5 +107,28 @@ class ApiPostControllerTest extends ControllerTestCase {
             1,4,5,6
         );
         $this->assertEquals($expected, $result);
+    }
+
+    public function testPostEditData() {
+        $data = array('title' => 'edit post', 'body' => 'edit post body.');
+        $this->testAction('/posts/edit/1',
+            array('data' => $data, 'method' => 'put')
+        );
+        $this->assertStringEndsWith("/posts", $this->headers['Location']);
+
+        $data = array();
+        $result = $this->testAction('/api/post/1',
+            array('data' => $data, 'method' => 'get', 'return' => 'contents')
+        );
+        $result = json_decode($result, true);
+        $expected = array(
+            'id'    => '1',
+            'title' => 'edit post',
+            'body'  => 'edit post body.',
+        );
+        $this->assertEquals($expected, $result);
+    }
+
+    public function testPostDeleteData() {
     }
 }
