@@ -13,9 +13,32 @@ class ApiPostControllerTest extends ControllerTestCase {
  * @var array
  */
 	public $fixtures = array(
+        'app.user',
 		'app.post'
 	);
 
+    public function setUp() {
+        parent::setUp();
+
+        $testData = array(
+            'User' => array (
+                'username' => 'ooo',
+                'password' => 'lll'
+            )
+        );
+        $this->testAction('/users/login',
+            array('data' => $testData, 'method' => 'post')
+        );
+    }
+
+    public function tearDown() {
+        $this->Controller = $this->generate('Users');
+        $testData = array();
+        $this->testAction('/users/logout',
+            array('data' => $testData, 'method' => 'get')
+        );
+        parent::tearDown();
+    }
 
     public function testIndex() {
         $data = array();
