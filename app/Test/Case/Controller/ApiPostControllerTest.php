@@ -52,6 +52,18 @@ class ApiPostControllerTest extends ControllerTestCase {
         $this->assertEquals($expected, $result);
     }
 
+    public function testMyIndex() {
+        $data = array();
+        $result = $this->testAction('/api/my_posts',
+            array('data' => $data, 'method' => 'get', 'return' => 'contents')
+        );
+        $result = json_decode($result, true);
+        $expected = array(
+            1,2,3
+        );
+        $this->assertEquals($expected, $result);
+    }
+
     public function testDraft() {
         $data = array();
         $result = $this->testAction('/api/draft',

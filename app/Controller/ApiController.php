@@ -26,6 +26,12 @@ class ApiController extends AppController {
         $this->RESTfulAPI->set($result);
     }
 
+    public function my_posts() {
+        $user_id = $this->Auth->user('id');
+        $result = $this->Post->getPostsId($user_id);
+        $this->RESTfulAPI->set($result);
+    }
+
     public function draft() {
         $result = $this->Post->getDraftIds();
         $this->RESTfulAPI->set($result);

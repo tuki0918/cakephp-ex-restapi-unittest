@@ -27,6 +27,17 @@ class Post extends AppModel {
         return $result;
 	}
 
+	public function getPostsId($user_id) {
+        $data = $this->find('all', array(
+            'conditions' => array(
+                'Post.user_id' => $user_id,
+            ),
+            'fields' => array('id')
+        ));
+        $result = hash::extract($data, '{n}.Post.id');
+        return $result;
+	}
+
 	public function getDraftIds() {
         $data = $this->find('all', array(
             'conditions' => array(
